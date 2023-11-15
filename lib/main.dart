@@ -1,4 +1,5 @@
 import 'package:bwi_intern/screens/login.dart';
+import 'package:bwi_intern/screens/otp.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,6 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        'otp': (context) => const otp(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        // '/second': (context) => const SecondScreen(),
+      },
       theme: ThemeData(
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         primaryColor: Colors.white,

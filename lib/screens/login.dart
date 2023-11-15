@@ -10,11 +10,11 @@ class login extends StatefulWidget {
 class _loginState extends State<login> {
   @override
   Widget build(BuildContext context) {
+
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
               // padding: EdgeInsets.only(left: 10),
@@ -75,7 +75,9 @@ class _loginState extends State<login> {
                                       10.0), // BorderRadius for rounded corners
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, 'otp');
+                              },
                               child: Text(
                                 'CONTINUE',
                                 style: TextStyle(color: Colors.white),
