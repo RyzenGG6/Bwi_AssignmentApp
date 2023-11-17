@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "157804758336",
+    "project_id": "bwi-intern",
+    "storage_bucket": "bwi-intern.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157804758336:android:ccf51e9a6199e6b14526a5",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn9UX7DIR0_5jkcCHg-TIG68THWNOmNvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157804758336:android:316add547d35e2144526a5",
+        "android_client_info": {
+          "package_name": "com.example.bwi_intern"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn9UX7DIR0_5jkcCHg-TIG68THWNOmNvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
