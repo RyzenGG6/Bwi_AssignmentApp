@@ -1,16 +1,86 @@
+import 'dart:async';
+
+import 'package:bwi_intern/screens/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
+String verify='';
+bool val=false;
+Future<bool> validateOTP(String phoneNumber, String otp) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  try {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        await auth.signInWithCredential(credential);
+        print("success");
+        val = true;
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        print("verification error");
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+        print("code sent");
+        verify=verificationId;
+        val=true;
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        
+      },
+    );
+    return val;
+  } catch (error) {
+    print("error $error");
+    return false;
+  }
+}
+
 class otp extends StatefulWidget {
-  const otp({super.key});
+ final String phone_Number;
+
+   otp({Key? key, required this.phone_Number}) : super(key: key);
 
   @override
   State<otp> createState() => _otpState();
 }
 
 class _otpState extends State<otp> {
+  String Otp='';
+  bool _isButtonDisabled = false;
+  int _timerSeconds = 60;
+@override
+  void initState() {
+    // TODO: implement initState
+  _startTimer();
+    super.initState();
+  }
+  void _startTimer() {
+    _isButtonDisabled = true;
+    const oneSec = const Duration(seconds: 1);
+    Timer.periodic(oneSec, (Timer timer) {
+      if (_timerSeconds == 0) {
+        setState(() {
+          _isButtonDisabled = false;
+          timer.cancel();
+        });
+      } else {
+        setState(() {
+          _timerSeconds--;
+        });
+      }
+    });
+  }
+  final FirebaseAuth auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
+    print("started");
+    if(widget.phone_Number.isEmpty){
+      print("empty number");
+    }
+    else {
+      print(widget.phone_Number);
+    }
     final _otpPinFieldController = GlobalKey<OtpPinFieldState>();
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -56,17 +126,32 @@ class _otpState extends State<otp> {
                             activeFieldBackgroundColor: Colors.grey,
                           ),
                           maxLength: 6,
-                          onSubmit: (text) {},
+                          onSubmit: (text) {
+                            setState(() {
+                              Otp=text;
+                            });
+
+                          },
                           onChange: (text) {}),
                     ),
                     Container(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                        padding: EdgeInsets.only(top: 20),
+                        child:
+                        Text(
+                          _isButtonDisabled
+                              ? 'Resend OTP in $_timerSeconds seconds'
+                              : 'OTP Resent',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                    ),
+                    Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.only(top: 60),
+                              padding: EdgeInsets.only(top: 20),
                               width: 280,
-                              height: 110,
+                              height: 68,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: Color(0xFF0E516C),
@@ -76,10 +161,26 @@ class _otpState extends State<otp> {
                                         10.0), // BorderRadius for rounded corners
                                   ),
                                 ),
-                                onPressed: () {
-                                  setState(() {});
-                                },
-                                child: Text(
+                                onPressed: () async {
+    bool val= await validateOTP(widget.phone_Number, Otp);
+    if (val == true) {
+    try {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+
+    verificationId: verify, smsCode: Otp);
+
+    // Sign the user in (or link) with the credential
+    await auth.signInWithCredential(credential);
+
+    Navigator.pushNamed(context, 'home');
+    print("success");
+    } catch (error) {
+    print("Error during sign in: $error");
+    }
+    }
+    }
+,
+    child: Text(
                                   'CONTINUE',
                                   style: TextStyle(color: Colors.white),
                                 ),
