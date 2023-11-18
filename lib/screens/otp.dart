@@ -49,6 +49,7 @@ class otp extends StatefulWidget {
 class _otpState extends State<otp> {
   String Otp='';
   bool _isButtonDisabled = false;
+  final _otpPinFieldController = GlobalKey<OtpPinFieldState>();
   int _timerSeconds = 10;
 @override
   void initState() {
@@ -58,8 +59,10 @@ class _otpState extends State<otp> {
   }
   void _startTimer() {
     _isButtonDisabled = true;
+    _otpPinFieldController.currentState?.clearOtp();
     setState(() {
       label='CONTINUE';
+
     });
     const oneSec = const Duration(seconds: 1);
     Timer.periodic(oneSec, (Timer timer) {
@@ -90,7 +93,7 @@ class _otpState extends State<otp> {
     else {
       print(widget.phone_Number);
     }
-    final _otpPinFieldController = GlobalKey<OtpPinFieldState>();
+
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -131,6 +134,7 @@ class _otpState extends State<otp> {
                     Container(
                       margin: EdgeInsets.only(left: 10, top: 80),
                       child: OtpPinField(
+                        key: _otpPinFieldController,
                           otpPinFieldStyle: OtpPinFieldStyle(
                             activeFieldBackgroundColor: Colors.grey,
                           ),
@@ -141,7 +145,9 @@ class _otpState extends State<otp> {
                             });
 
                           },
-                          onChange: (text) {}),
+                          onChange: (text) {
+                            Otp=text;
+                          }),
                     ),
                     Container(
                         padding: EdgeInsets.only(top: 20),
@@ -171,7 +177,7 @@ class _otpState extends State<otp> {
                                   ),
                                 ),
                                 onPressed: () async {
-    if(_isButtonDisabled){
+    if(label=='CONTINUE'){
     bool val= await validateOTP(widget.phone_Number, Otp);
     if (val == true) {
     try {
@@ -193,23 +199,11 @@ class _otpState extends State<otp> {
     else
     {
       _startTimer();
+
     bool val= await validateOTP(widget.phone_Number, Otp);
-    if (val == true) {
-    try {
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
 
-    verificationId: verify, smsCode: Otp);
+    }
 
-    // Sign the user in (or link) with the credential
-    await auth.signInWithCredential(credential);
-
-    Navigator.pushNamed(context, 'home');
-    print("success");
-    } catch (error) {
-    print("Error during sign in: $error");
-    }
-    }
-    }
 
     },
     child: Text(
