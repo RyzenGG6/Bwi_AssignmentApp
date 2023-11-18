@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 String verify='';
+String label='';
 bool val=false;
 Future<bool> validateOTP(String phoneNumber, String otp) async {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -48,7 +49,7 @@ class otp extends StatefulWidget {
 class _otpState extends State<otp> {
   String Otp='';
   bool _isButtonDisabled = false;
-  int _timerSeconds = 60;
+  int _timerSeconds = 10;
 @override
   void initState() {
     // TODO: implement initState
@@ -57,11 +58,18 @@ class _otpState extends State<otp> {
   }
   void _startTimer() {
     _isButtonDisabled = true;
+    setState(() {
+      label='CONTINUE';
+    });
     const oneSec = const Duration(seconds: 1);
     Timer.periodic(oneSec, (Timer timer) {
       if (_timerSeconds == 0) {
         setState(() {
           _isButtonDisabled = false;
+          _timerSeconds=10;
+          setState(() {
+            label='RESEND CODE';
+          });
           timer.cancel();
         });
       } else {
@@ -70,6 +78,7 @@ class _otpState extends State<otp> {
         });
       }
     });
+
   }
   final FirebaseAuth auth=FirebaseAuth.instance;
   @override
@@ -139,8 +148,8 @@ class _otpState extends State<otp> {
                         child:
                         Text(
                           _isButtonDisabled
-                              ? 'Resend OTP in $_timerSeconds seconds'
-                              : 'OTP Resent',
+                              ? 'Resend code in $_timerSeconds seconds'
+                              : '',
                           style: TextStyle(color: Colors.red),
                         ),
                     ),
@@ -162,6 +171,28 @@ class _otpState extends State<otp> {
                                   ),
                                 ),
                                 onPressed: () async {
+    if(_isButtonDisabled){
+    bool val= await validateOTP(widget.phone_Number, Otp);
+    if (val == true) {
+    try {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+
+    verificationId: verify, smsCode: Otp);
+
+    // Sign the user in (or link) with the credential
+    await auth.signInWithCredential(credential);
+
+    Navigator.pushNamed(context, 'home');
+    print("success");
+    } catch (error) {
+    print("Error during sign in: $error");
+    }
+    }
+
+    }
+    else
+    {
+      _startTimer();
     bool val= await validateOTP(widget.phone_Number, Otp);
     if (val == true) {
     try {
@@ -179,9 +210,10 @@ class _otpState extends State<otp> {
     }
     }
     }
-,
+
+    },
     child: Text(
-                                  'CONTINUE',
+      label,
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
