@@ -50,7 +50,7 @@ class _otpState extends State<otp> {
   String Otp='';
   bool _isButtonDisabled = false;
   final _otpPinFieldController = GlobalKey<OtpPinFieldState>();
-  int _timerSeconds = 10;
+  int _timerSeconds = 60;
 @override
   void initState() {
     // TODO: implement initState
@@ -69,7 +69,7 @@ class _otpState extends State<otp> {
       if (_timerSeconds == 0) {
         setState(() {
           _isButtonDisabled = false;
-          _timerSeconds=10;
+          _timerSeconds=60;
           setState(() {
             label='RESEND CODE';
           });
