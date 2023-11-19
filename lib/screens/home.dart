@@ -1,13 +1,18 @@
 import 'package:bwi_intern/Card/category_card.dart';
+import 'package:bwi_intern/Card/service.dart';
 import 'package:bwi_intern/Firebase/firebase.dart';
 import 'package:bwi_intern/pages/page1.dart';
 import 'package:bwi_intern/pages/page2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:polar_tab_bar/models/polar_tab_item.dart';
+import 'package:polar_tab_bar/polar_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:polar_tab_bar/widgets/polar_tab_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 
 import '../Card/card.dart';
 
@@ -19,6 +24,31 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  final List<PolarTabItem> tabs = [
+    PolarTabItem(
+      index: 0,
+      title: "All",
+      page:  PolarTabPage(
+        child:
+        service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),
+      ),
+    ),
+    PolarTabItem(
+      index: 1,
+      title: "Haircuts",
+      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),),
+    ),
+    PolarTabItem(
+      index: 2,
+      title: "Make up",
+      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),),
+    ),
+    PolarTabItem(
+      index: 2,
+      title: "Manicure",
+      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),),
+    ),
+  ];
    String link1 = "", link2 = "";
   final List<String> item = [
     'Assets/images/profile.jpg'
@@ -326,11 +356,169 @@ Container(
 
                     ),
                   ),
-                ],
-              );
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(left: 40,top: 20),
+                        child: Text(
+                          'Most Popular Services',style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 17
+                        ),
+                        ),
+                      ),
+                    ],
+                  ),
+            //             Container(
+            //               height: 50,
+            //               child: DefaultTabController(
+            //               length: 3,
+            //               child: Column(
+            //               children: [
+            //               Material(
+            //               child: Container(
+            //               height: 55,
+            //               // width: 10,
+            //               color: Colors.white,
+            //               child: TabBar(
+            //               physics: const ClampingScrollPhysics(),
+            //               padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+            //               unselectedLabelColor: Colors.pink,
+            //               indicatorSize: TabBarIndicatorSize.label,
+            //               indicator: BoxDecoration(
+            //               borderRadius: BorderRadius.circular(30),
+            //               color: Colors.green.shade700
+            // ),
+            // tabs: [
+            // Tab(
+            // child: Container(
+            // height: 50,
+            // decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(30),
+            // border: Border.all(color: Colors.pinkAccent, width: 1)
+            // ),
+            // child: Align(
+            // alignment: Alignment.center,
+            // child: Text("All"),
+            // ),
+            // ),
+            // ),
+            // Tab(
+            // child: Container(
+            // height: 50,
+            // decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(30),
+            // border: Border.all(color: Colors.pinkAccent, width: 1)
+            // ),
+            // child: Align(
+            // alignment: Alignment.center,
+            // child: Text("Haircuts"),
+            // ),
+            // ),
+            // ),
+            // Tab(
+            // child: Container(
+            // height: 50,
+            // decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(30),
+            // border: Border.all(color: Colors.pinkAccent, width: 1)
+            // ),
+            // child: Align(
+            // alignment: Alignment.center,
+            // child: Text("Make up"),
+            // ),
+            // ),
+            // ),
+            //   Tab(
+            //     child: Container(
+            //       height: 40,
+            //       width: 70,
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(20),
+            //           border: Border.all(color: Colors.pinkAccent, width: 1)
+            //       ),
+            //       child: Align(
+            //         alignment: Alignment.center,
+            //         child: Text("Manicure"),
+            //       ),
+            //     ),
+            //   )
+            // ],
+            // ),
+            // ),
+            // ),
+            // SizedBox(
+            //   height: 300,
+            // ),
+            // Expanded(
+            // child: TabBarView(
+            // children: [
+            //   ListView.separated(
+            //     padding: EdgeInsets.all(15),
+            //     itemCount: 20,
+            //     separatorBuilder: (BuildContext context, int index) => const Divider(),
+            //     itemBuilder: (context, index){
+            //       return ListTile(
+            //         onTap: () {},
+            //         title: Text("Chat List $index"),
+            //         subtitle: Text("Tab bar ui"),
+            //         trailing: Icon(Icons.arrow_circle_right_sharp),
+            //       );
+            //     },
+            //   ),
+            //   ListView.separated(
+            //     padding: EdgeInsets.all(15),
+            //     itemCount: 20,
+            //     separatorBuilder: (BuildContext context, int index) => const Divider(),
+            //     itemBuilder: (context, index){
+            //       return ListTile(
+            //         onTap: () {},
+            //         title: Text("Status List $index"),
+            //         subtitle: Text("Tab bar ui"),
+            //         trailing: Icon(Icons.arrow_circle_right_sharp),
+            //       );
+            //     },
+            //   ),
+            //   ListView.separated(
+            //     padding: EdgeInsets.all(15),
+            //     itemCount: 20,
+            //     separatorBuilder: (BuildContext context, int index) => const Divider(),
+            //     itemBuilder: (context, index){
+            //       return ListTile(
+            //         onTap: () {},
+            //         title: Text("Call List $index"),
+            //         subtitle: Text("Tab bar ui"),
+            //         trailing: Icon(Icons.arrow_circle_right_sharp),
+            //       );
+            //     },
+            //   ),
+            // ],
+            // ),
+            // )
+            //     ],
+            //   ),),
+            //             ),
+                  
+                  // Text("bkfnakjd\nanfkddfksdnfsdjksf\ndfjsdbsf\n\nfsdffs\sdfsdfsd\nsdfdsfds")
+                  Container(
+                    height: 350,
+                    child: Container(
+                      // width: 40,
+                      padding: EdgeInsets.only(left: 40,top: 20),
+                      child: PolarTabBar(
+                        swipeable: true,
+                        activeBackground: Colors.blueAccent.shade700,
+                          type: PolarTabType.pill, // Default Type
+                          tabs: tabs
+                      ),
+                    ),
+                  ),
+                  
+                                    ],);
             }
           },
         ),
+
       ),
     );
   }
