@@ -1,3 +1,4 @@
+import 'package:bwi_intern/Card/category_card.dart';
 import 'package:bwi_intern/Firebase/firebase.dart';
 import 'package:bwi_intern/pages/page1.dart';
 import 'package:bwi_intern/pages/page2.dart';
@@ -253,10 +254,12 @@ class _homeState extends State<home> {
                     ),
                   ),
                   Row(
-                    // crossAxisAlignment: ,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+
                       Container(
-                        padding: EdgeInsets.only(left: 20,top: 30),
+                        padding: EdgeInsets.only(left: 20,top: 40),
                         child: Text(
                           'Category',style: TextStyle(
                             fontWeight: FontWeight.w600,
@@ -265,7 +268,7 @@ class _homeState extends State<home> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: screenWidth-180,top: 30),
+                        padding: EdgeInsets.only(left: screenWidth-180,top: 40),
                         child: Text(
                           'View All',style: TextStyle(
                           color: Colors.lightBlue.shade900,
@@ -277,9 +280,52 @@ class _homeState extends State<home> {
                     ],
                   ),
                   SizedBox(
-                    height: 100,
+                    height: 20,
                   ),
+Container(
+  width: screenWidth,
+  child:   Row(
 
+    children: [
+
+  category(imagePath: "Assets/images/haircut.png", title: "Hair Cut"),
+
+  category(imagePath: "Assets/images/makeup.png", title: "Hair Cut"),
+
+  category(imagePath: "Assets/images/straightening.png", title: "Hair Cut")
+
+
+
+
+
+    ],
+
+  ),
+
+),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: screenWidth,
+                    child:   Row(
+
+                      children: [
+
+                        category(imagePath: "Assets/images/haircut.png", title: "Hair Cut"),
+
+                        category(imagePath: "Assets/images/makeup.png", title: "Hair Cut"),
+
+                        category(imagePath: "Assets/images/straightening.png", title: "Hair Cut")
+
+
+
+
+
+                      ],
+
+                    ),
+                  ),
                 ],
               );
             }

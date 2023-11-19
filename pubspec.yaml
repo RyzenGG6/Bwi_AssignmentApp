@@ -65,6 +65,11 @@ flutter:
     - Assets/images/img.png
     - Assets/images/profile.jpg
     - Assets/images/filter icon.png
+    - Assets/images/haircut.png
+    - Assets/images/beard.png
+    - Assets/images/makeup.png
+    - Assets/images/mani-pedi.png
+    - Assets/images/straightening.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
