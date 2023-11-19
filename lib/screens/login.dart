@@ -25,9 +25,15 @@ class _loginState extends State<login> {
           Container(
               // padding: EdgeInsets.only(left: 10),
               margin: EdgeInsets.only(left: 300, top: 50),
-              child: Text(
-                'SKIP',
-                style: TextStyle(color: Colors.pink),
+              child:
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, 'home');
+                } ,
+                child: Text(
+                  'SKIP',
+                  style: TextStyle(color: Colors.pink),
+                ),
               )),
           Container(
               // padding: EdgeInsets.all(10),
