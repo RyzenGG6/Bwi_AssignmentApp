@@ -24,32 +24,43 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+
   final List<PolarTabItem> tabs = [
     PolarTabItem(
       index: 0,
       title: "All",
       page:  PolarTabPage(
         child:
-        service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),
+
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),
+              service(imagePath: "Assets/images/filter icon.png", title: "Tanishk Unisex Salon"),
+            ],
+          ),
+        ),
       ),
+
     ),
     PolarTabItem(
       index: 1,
       title: "Haircuts",
-      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),),
+      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon",distance:1.2  ,description: 'janakpuri, New Delhi',rating: 4.8,reviews: 256),),
     ),
     PolarTabItem(
       index: 2,
       title: "Make up",
-      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),),
+      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon",distance:1.2  ,description: 'janakpuri, New Delhi',rating: 4.8,reviews: 256,),),
     ),
     PolarTabItem(
-      index: 2,
+      index: 3,
       title: "Manicure",
-      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),),
+      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon",distance:1.2  ,description: 'janakpuri, New Delhi',rating: 4.8,reviews: 256),),
     ),
   ];
    String link1 = "", link2 = "";
+  int _selectedIndex = 0;
   final List<String> item = [
     'Assets/images/profile.jpg'
     'Assets/images/profile.jpg'
@@ -75,11 +86,44 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
+
     int currentIndex = 0;
     double screenWidth = MediaQuery.of(context).size.width;
     PageController pageController = PageController();
 
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+      unselectedItemColor:Colors.black ,
+      onTap: (index){
+          setState(() {
+_selectedIndex=index;
+          });
+      },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Menu',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: 'Messages',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('banner').snapshots(),
