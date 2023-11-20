@@ -23,6 +23,8 @@ class home extends StatefulWidget {
   State<home> createState() => _homeState();
 }
 String url='',surl='',surl2='',surl3='';
+String name='',name1='',name2='';
+String price='',price1='',price2='';
 String curl='';
 String curl2='',curl3='',title='',title1='',title2='',title3='',title4='',title5='';
 String purl='',purl1='',purl2='',purl3='',purl4='',purl5='';
@@ -147,6 +149,12 @@ class _homeState extends State<home> {
               final url = data[1].data() as Map<String, dynamic>;
               // Access the specific data you need from the first document
               link1 = url['url'] as String;
+              name = url['name'] as String;
+              name1 = url['name1'] as String;
+              name2 = url['name2'] as String;
+              price = url['price'] as String;
+              price1 = url['price1'] as String;
+              price2 = url['price2'] as String;
               // link2 = url['movie2'] as String;
 
               return Column(
@@ -315,17 +323,20 @@ class _homeState extends State<home> {
                         // Example Card 1
                         MyCard(
                           imagePath:surl,
-                          title: 'Beard Trimming',
+                          title: name,
+                          price: price,
                         ),
 
                         // Add more cards as needed
                         MyCard(
                           imagePath:surl3,
-                          title: 'Another Service',
+                          title: name1,
+                          price: price1,
                         ),
                         MyCard(
                           imagePath: surl2,
-                          title: 'Another Service',
+                          title: name2,
+                          price: price2,
                         ),
 
                         // Add more cards as needed
