@@ -66,7 +66,7 @@ class _loginState extends State<login> {
                           children: [
                             TextField(
                               controller: phoneNumber_Controller,
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.call,
