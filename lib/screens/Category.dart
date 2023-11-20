@@ -74,7 +74,6 @@ _fetchImageUrl();
             title8 = name['name8'] as String;
             title9 = name['name9'] as String;
 
-            // link2 = url['movie2'] as String;
 
             return Column(
               children: [
@@ -160,7 +159,6 @@ _fetchImageUrl();
       String Url14 = await getImageUrl('Category/waxing.png');
       String Url15 = await getImageUrl('Category/coloring.png');
       String Url16 = await getImageUrl('Category/facial.png');
-      // String purl = await getImageUrl('Category/straightening.png');
 
       setState(() {
         purl=Url8;
@@ -176,7 +174,7 @@ _fetchImageUrl();
       });
     } catch (e) {
       print('Error fetching image URL: $e');
-      // Handle the error as needed
+
     }
   }
 }

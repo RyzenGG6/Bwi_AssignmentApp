@@ -100,10 +100,6 @@ class _homeState extends State<home> {
   final List<String> item = [
     'Assets/images/profile.jpg'
         'Assets/images/profile.jpg'
-    // 'https://cdn.pixabay.com/photo/2015/03/10/17/23/youtube-667451_1280.png',
-    // 'https://cdn.pixabay.com/photo/2015/03/10/17/23/youtube-667451_1280.png',
-    // 'https://example.com/image3.jpg',
-    // Add more image URLs as needed
   ];
 
   final List<String> textList = [
@@ -178,8 +174,7 @@ class _homeState extends State<home> {
                             ),
                           ),
 
-                          // backgroundImage: AssetImage(
-                          //     'Assets/images/profile.jpg'),
+
                         ),
                       ),
                       Container(
@@ -225,12 +220,6 @@ class _homeState extends State<home> {
                           ),
                         ),
                       ),
-                      // Container(
-                      //   padding: EdgeInsets.only(left:0,top: 40),
-                      //   child: IconButton(onPressed: (){
-                      //
-                      //   }, icon: Icon(Icons.bookmark_add_outlined,color: Colors.grey.shade800,),),
-                      // ),
                     ],
                   ),
                   Container(
@@ -256,25 +245,6 @@ class _homeState extends State<home> {
                       ),
                     ),
                   ),
-//
-// PageView(
-//   controller: pageController,
-//   scrollDirection: Axis.horizontal,
-//   onPageChanged: (num){
-//     setState(() {
-//       currentIndex=num;
-//     });
-//   },
-//   children: [
-// page1(),
-//   ],
-// ),
-//
-//           SmoothPageIndicator(
-//             controller: pageController,
-//             count: 3,
-//             effect: WormEffect(activeDotColor: Colors.blue, dotColor: Colors.grey),
-//           ),
 
                 SizedBox(
                 height: 250,
@@ -304,7 +274,7 @@ class _homeState extends State<home> {
                     ),
                   ),
                   // PageView
-// SizedBox
+
 
                   Row(
                     children: [
@@ -315,8 +285,6 @@ class _homeState extends State<home> {
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600, fontSize: 17
                           ),
-                          // TextStyle(
-                          //     fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                       )
                     ],
@@ -326,14 +294,13 @@ class _homeState extends State<home> {
                     physics: AlwaysScrollableScrollPhysics(),
                     child: Row(
                       children: [
-                        // Example Card 1
                         MyCard(
                           imagePath:surl,
                           title: name,
                           price: price,
                         ),
 
-                        // Add more cards as needed
+
                         MyCard(
                           imagePath:surl3,
                           title: name1,
@@ -345,14 +312,12 @@ class _homeState extends State<home> {
                           price: price2,
                         ),
 
-                        // Add more cards as needed
-                        // ...
+
                       ],
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         padding: EdgeInsets.only(left: 20, top: 40),
@@ -362,8 +327,6 @@ class _homeState extends State<home> {
                               fontWeight: FontWeight.w600, fontSize: 17
                           ),
 
-                          // TextStyle(
-                          //     fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                       ),
                       Container(
@@ -399,137 +362,6 @@ class _homeState extends State<home> {
                     child:row(),
                   ),
 
-                  //             Container(
-                  //               height: 50,
-                  //               child: DefaultTabController(
-                  //               length: 3,
-                  //               child: Column(
-                  //               children: [
-                  //               Material(
-                  //               child: Container(
-                  //               height: 55,
-                  //               // width: 10,
-                  //               color: Colors.white,
-                  //               child: TabBar(
-                  //               physics: const ClampingScrollPhysics(),
-                  //               padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
-                  //               unselectedLabelColor: Colors.pink,
-                  //               indicatorSize: TabBarIndicatorSize.label,
-                  //               indicator: BoxDecoration(
-                  //               borderRadius: BorderRadius.circular(30),
-                  //               color: Colors.green.shade700
-                  // ),
-                  // tabs: [
-                  // Tab(
-                  // child: Container(
-                  // height: 50,
-                  // decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(30),
-                  // border: Border.all(color: Colors.pinkAccent, width: 1)
-                  // ),
-                  // child: Align(
-                  // alignment: Alignment.center,
-                  // child: Text("All"),
-                  // ),
-                  // ),
-                  // ),
-                  // Tab(
-                  // child: Container(
-                  // height: 50,
-                  // decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(30),
-                  // border: Border.all(color: Colors.pinkAccent, width: 1)
-                  // ),
-                  // child: Align(
-                  // alignment: Alignment.center,
-                  // child: Text("Haircuts"),
-                  // ),
-                  // ),
-                  // ),
-                  // Tab(
-                  // child: Container(
-                  // height: 50,
-                  // decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(30),
-                  // border: Border.all(color: Colors.pinkAccent, width: 1)
-                  // ),
-                  // child: Align(
-                  // alignment: Alignment.center,
-                  // child: Text("Make up"),
-                  // ),
-                  // ),
-                  // ),
-                  //   Tab(
-                  //     child: Container(
-                  //       height: 40,
-                  //       width: 70,
-                  //       decoration: BoxDecoration(
-                  //           borderRadius: BorderRadius.circular(20),
-                  //           border: Border.all(color: Colors.pinkAccent, width: 1)
-                  //       ),
-                  //       child: Align(
-                  //         alignment: Alignment.center,
-                  //         child: Text("Manicure"),
-                  //       ),
-                  //     ),
-                  //   )
-                  // ],
-                  // ),
-                  // ),
-                  // ),
-                  // SizedBox(
-                  //   height: 300,
-                  // ),
-                  // Expanded(
-                  // child: TabBarView(
-                  // children: [
-                  //   ListView.separated(
-                  //     padding: EdgeInsets.all(15),
-                  //     itemCount: 20,
-                  //     separatorBuilder: (BuildContext context, int index) => const Divider(),
-                  //     itemBuilder: (context, index){
-                  //       return ListTile(
-                  //         onTap: () {},
-                  //         title: Text("Chat List $index"),
-                  //         subtitle: Text("Tab bar ui"),
-                  //         trailing: Icon(Icons.arrow_circle_right_sharp),
-                  //       );
-                  //     },
-                  //   ),
-                  //   ListView.separated(
-                  //     padding: EdgeInsets.all(15),
-                  //     itemCount: 20,
-                  //     separatorBuilder: (BuildContext context, int index) => const Divider(),
-                  //     itemBuilder: (context, index){
-                  //       return ListTile(
-                  //         onTap: () {},
-                  //         title: Text("Status List $index"),
-                  //         subtitle: Text("Tab bar ui"),
-                  //         trailing: Icon(Icons.arrow_circle_right_sharp),
-                  //       );
-                  //     },
-                  //   ),
-                  //   ListView.separated(
-                  //     padding: EdgeInsets.all(15),
-                  //     itemCount: 20,
-                  //     separatorBuilder: (BuildContext context, int index) => const Divider(),
-                  //     itemBuilder: (context, index){
-                  //       return ListTile(
-                  //         onTap: () {},
-                  //         title: Text("Call List $index"),
-                  //         subtitle: Text("Tab bar ui"),
-                  //         trailing: Icon(Icons.arrow_circle_right_sharp),
-                  //       );
-                  //     },
-                  //   ),
-                  // ],
-                  // ),
-                  // )
-                  //     ],
-                  //   ),),
-                  //             ),
-
-                  // Text("bkfnakjd\nanfkddfksdnfsdjksf\ndfjsdbsf\n\nfsdffs\sdfsdfsd\nsdfdsfds")
                   Row(
                     children: [
                       Container(
@@ -540,8 +372,6 @@ class _homeState extends State<home> {
                 fontWeight: FontWeight.w600, fontSize: 17
                 )
 
-                          // TextStyle(
-                          //     fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                       ),
                     ],

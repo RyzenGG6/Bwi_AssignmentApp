@@ -53,7 +53,7 @@ class _loginState extends State<login> {
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
-                      25.0), // Adjust the radius as needed
+                      25.0),
                 ),
                 elevation: 0.0,
                 color: Colors.white,
@@ -75,18 +75,6 @@ class _loginState extends State<login> {
                                 hintText: 'Enter Mobile Number',
                               ),
                             ),
-                            // TextField(
-                            //   keyboardType: TextInputType.number,
-                            //   controller:phoneNumber_Controller ,
-                            //   style: TextStyle(color: Colors.grey),
-                            //   decoration: InputDecoration(
-                            //       suffixIcon: Icon(
-                            //         Icons.call,
-                            //         color: Colors.grey,
-                            //       ),
-                            //       hintText: 'Enter Mobile Number',
-                            //       hintStyle: TextStyle(color: Colors.grey)),
-                            // ),
                             Container(
                               padding: EdgeInsets.only(top: 60),
                               width: 280,
@@ -155,8 +143,6 @@ class _loginState extends State<login> {
                           ],
                         )),
 
-                    //                 Text('By continuing you are agree to our'),
-                    // Text(Terms & Conditions )and Privacy Policy
                   ],
                 ),
               ),
