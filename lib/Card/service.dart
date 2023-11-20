@@ -19,13 +19,14 @@ class service extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(imagePath+'\n');
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       height: 200,
       width: screenWidth - 20,
-      padding: EdgeInsets.only(left: 20, top: 20, right: 10),
+      padding: EdgeInsets.only(left: 20, top: 10, right: 10),
       child: Card(
-        color: Colors.blueAccent,
+        // color: Colors.blueAccent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -48,7 +49,7 @@ class service extends StatelessWidget {
                 child: Image.network(
                   imagePath,
                   height: 150,
-                  width: 100,
+                  width: 80,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -72,7 +73,7 @@ class service extends StatelessWidget {
                     ),
                     padding: EdgeInsets.only(top: 20),
                   ),
-                  SizedBox(height: 5),
+                  // SizedBox(height: 5),
                   Text(description),
                   SizedBox(height: 5),
                   Row(

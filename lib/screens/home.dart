@@ -14,6 +14,7 @@ import 'package:polar_tab_bar/widgets/polar_tab_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Card/card.dart';
 
@@ -22,7 +23,8 @@ class home extends StatefulWidget {
   @override
   State<home> createState() => _homeState();
 }
-String url='',surl='',surl2='',surl3='';
+String url='',url1='',surl='',surl2='',surl3='';
+String link='';
 String name='',name1='',name2='';
 String price='',price1='',price2='';
 String curl='';
@@ -42,10 +44,10 @@ class _homeState extends State<home> {
           child: Column(
             children: [
               service(
-                  imagePath:curl,
+                  imagePath:link,
                   title: "Tanishk Unisex Salon"),
               service(
-                  imagePath: "Assets/images/filter icon.png",
+                  imagePath: curl2,
                   title: "Tanishk Unisex Salon"),
             ],
           ),
@@ -149,6 +151,7 @@ class _homeState extends State<home> {
               final url = data[1].data() as Map<String, dynamic>;
               // Access the specific data you need from the first document
               link1 = url['url'] as String;
+              link = url['url1'] as String;
               name = url['name'] as String;
               name1 = url['name1'] as String;
               name2 = url['name2'] as String;
@@ -204,7 +207,7 @@ class _homeState extends State<home> {
                         child: IconButton(
                           onPressed: () {
                             // print(link1);
-                            print(purl);
+                            print(curl);
                           },
                           icon: Icon(
                             Icons.notifications_none_outlined,
@@ -309,8 +312,11 @@ class _homeState extends State<home> {
                         padding: EdgeInsets.only(left: 20, top: 40),
                         child: Text(
                           'Featured Services',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 17),
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600, fontSize: 17
+                          ),
+                          // TextStyle(
+                          //     fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                       )
                     ],
@@ -352,8 +358,12 @@ class _homeState extends State<home> {
                         padding: EdgeInsets.only(left: 20, top: 40),
                         child: Text(
                           'Category',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 17),
+                          style:GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600, fontSize: 17
+                          ),
+
+                          // TextStyle(
+                          //     fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                       ),
                       Container(
@@ -520,14 +530,34 @@ class _homeState extends State<home> {
                   //             ),
 
                   // Text("bkfnakjd\nanfkddfksdnfsdjksf\ndfjsdbsf\n\nfsdffs\sdfsdfsd\nsdfdsfds")
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(left: 30, top: 40),
+                        child: Text(
+                          'Most Popular Services',
+                          style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w600, fontSize: 17
+                )
+
+                          // TextStyle(
+                          //     fontWeight: FontWeight.w600, fontSize: 17),
+                        ),
+                      ),
+                    ],
+                  ),
                   Container(
                     height: 350,
                     child: Container(
                       // width: 40,
                       padding: EdgeInsets.only(left: 40, top: 20),
                       child: PolarTabBar(
+                        // background: Colors.lightBlue.shade100,
                           swipeable: true,
-                          activeBackground: Colors.blueAccent.shade700,
+                          activeTitleStyle: TextStyle(
+                            color: Colors.white
+                          ),
+                          activeBackground:Color(0xFF023e8a),
                           type: PolarTabType.pill, // Default Type
                           tabs: tabs),
                     ),
@@ -589,6 +619,7 @@ class _homeState extends State<home> {
   Future<void> _fetchImageUrl() async {
     try {
       String Url = await getImageUrl('banner.png');
+      String Url1 = await getImageUrl('banner2.png');
       String Url2 = await getImageUrl('Featured Services/beard.jpg');
       String Url3 = await getImageUrl('Featured Services/hair colouring.jpg');
       String Url4 = await getImageUrl('Featured Services/hair straightening.png');
@@ -605,6 +636,7 @@ class _homeState extends State<home> {
 
       setState(() {
         url = Url;
+        url1=Url1;
         surl=Url2;
         surl2=Url3;
         surl3=Url4;

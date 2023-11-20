@@ -46,6 +46,7 @@ dependencies:
   buttons_tabbar: ^1.3.8
   polar_tab_bar: ^0.0.2
   provider: ^6.1.1
+  google_fonts: ^6.1.0
 
 
 dev_dependencies:
@@ -73,6 +74,10 @@ flutter:
     - Assets/images/makeup.png
     - Assets/images/mani-pedi.png
     - Assets/images/straightening.png
+    - Assets/images/menu_icon.png
+    - Assets/images/home_icon.png
+    - Assets/images/messenger.png
+    - Assets/images/calendar.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

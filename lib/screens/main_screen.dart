@@ -2,6 +2,7 @@ import 'package:bwi_intern/screens/Category.dart';
 import 'package:bwi_intern/screens/home.dart';
 import 'package:flutter/material.dart';
 
+
 class main_screen extends StatefulWidget {
   const main_screen({super.key});
 
@@ -27,23 +28,34 @@ class _main_screenState extends State<main_screen> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon:Container(
+                height: 20,
+                child: Image.asset('Assets/images/home_icon.png')),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
+            icon: Container(
+                height: 30,
+          child: Image.asset('Assets/images/menu_icon.png')),
             label: 'Category',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
+            icon: Container(
+                height: 30,
+                child: Image.asset('Assets/images/calendar.png')),
+            // Icon(Icons.calendar_today),
             label: 'Calendar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
+            icon: Container(
+                height: 30,
+                child: Image.asset('Assets/images/messenger.png')),
             label: 'Messages',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Container(
+                height: 30,
+                child: Icon(Icons.person_2_outlined)),
             label: 'Profile',
           ),
         ],
