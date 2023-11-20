@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 
 Future<Map<String, dynamic>> getData() async {
+  await Future.delayed(Duration(seconds: 5));
   Map<String, dynamic> data = {};
   // Reference to your Firestore collection
   final CollectionReference collection =

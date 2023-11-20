@@ -45,7 +45,7 @@ class service extends StatelessWidget {
                   topLeft: Radius.circular(20.0),
                   bottomLeft: Radius.circular(20.0),
                 ),
-                child: Image.asset(
+                child: Image.network(
                   imagePath,
                   height: 150,
                   width: 100,

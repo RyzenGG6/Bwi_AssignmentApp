@@ -14,6 +14,7 @@ class category_page extends StatefulWidget {
 }
 
 class _category_pageState extends State<category_page> {
+  String purl='',purl1='',purl2='',purl3='',purl4='',purl5='',purl6='',purl7='',purl8='';
   String link1 = '';
   String title1 = '';
   String title2 = '';
@@ -24,24 +25,12 @@ class _category_pageState extends State<category_page> {
   String title7 = '';
   String title8 = '';
   String title9 = '';
-  Widget row() {
-    return Row(
 
-      children: [
-        // Text("data")
-
-        category(imagePath: "Assets/images/haircut.png", title: title1),
-
-        category(imagePath: "Assets/images/makeup.png", title: title2),
-
-        category(imagePath: "Assets/images/straightening.png", title: title3)
-      ],);
-  }
 
   @override
   void initState() {
     // TODO: implement initState
-
+_fetchImageUrl();
     super.initState();
   }
 
@@ -106,12 +95,12 @@ class _category_pageState extends State<category_page> {
                     // Text("data")
 
                     category(
-                        imagePath: "Assets/images/haircut.png", title: title1),
+                        imagePath: purl2, title: title1),
 
                     category(
-                        imagePath: "Assets/images/makeup.png", title: title2),
+                        imagePath:purl3, title: title2),
 
-                    category(imagePath: "Assets/images/straightening.png",
+                    category(imagePath:purl1,
                         title: title3)
 
 
@@ -122,13 +111,13 @@ class _category_pageState extends State<category_page> {
 
                   children: [
 
-                    category(imagePath: "Assets/images/mani-pedi.png",
+                    category(imagePath:purl4,
                         title: title4),
 
                     category(
-                        imagePath: "Assets/images/makeup.png", title: title5),
+                        imagePath: purl5, title: title5),
 
-                    category(imagePath: "Assets/images/straightening.png",
+                    category(imagePath: purl,
                         title: title6)
 
 
@@ -140,12 +129,12 @@ class _category_pageState extends State<category_page> {
                   children: [
 
                     category(
-                        imagePath: "Assets/images/haircut.png", title: title7),
+                        imagePath: purl7, title: title7),
 
                     category(
-                        imagePath: "Assets/images/makeup.png", title: title8),
+                        imagePath:purl6, title: title8),
 
-                    category(imagePath: "Assets/images/straightening.png",
+                    category(imagePath: purl8,
                         title: title9)
 
 
@@ -160,4 +149,34 @@ class _category_pageState extends State<category_page> {
   }
 
 
+  Future<void> _fetchImageUrl() async {
+    try {
+      String Url8 = await getImageUrl('Category/beard.png');
+      String Url9 = await getImageUrl('Category/straightening.png');
+      String Url10 = await getImageUrl('Category/haircut.png');
+      String Url11 = await getImageUrl('Category/makeup.png');
+      String Url12 = await getImageUrl('Category/mani-pedi.png');
+      String Url13 = await getImageUrl('Category/message.png');
+      String Url14 = await getImageUrl('Category/waxing.png');
+      String Url15 = await getImageUrl('Category/coloring.png');
+      String Url16 = await getImageUrl('Category/facial.png');
+      // String purl = await getImageUrl('Category/straightening.png');
+
+      setState(() {
+        purl=Url8;
+        purl1=Url9;
+        purl2=Url10;
+        purl3=Url11;
+        purl4=Url12;
+        purl5=Url13;
+        purl6=Url14;
+        purl7=Url15;
+        purl8=Url16;
+
+      });
+    } catch (e) {
+      print('Error fetching image URL: $e');
+      // Handle the error as needed
+    }
+  }
 }

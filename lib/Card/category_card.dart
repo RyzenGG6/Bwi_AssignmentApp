@@ -23,7 +23,7 @@ class category extends StatelessWidget {
           children: [
 
              Container(
-                child: Image.asset(
+                child: Image.network(
                   imagePath,
                   fit: BoxFit.contain,
                 ),

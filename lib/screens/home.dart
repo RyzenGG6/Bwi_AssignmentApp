@@ -22,9 +22,15 @@ class home extends StatefulWidget {
   @override
   State<home> createState() => _homeState();
 }
-
+String url='',surl='',surl2='',surl3='';
+String curl='';
+String curl2='',curl3='',title='',title1='',title2='',title3='',title4='',title5='';
+String purl='',purl1='',purl2='',purl3='',purl4='',purl5='';
 class _homeState extends State<home> {
-  String url='',surl='',surl2='',surl3='';
+
+
+
+
   final List<PolarTabItem> tabs = [
     PolarTabItem(
       index: 0,
@@ -34,7 +40,7 @@ class _homeState extends State<home> {
           child: Column(
             children: [
               service(
-                  imagePath: "Assets/images/img.png",
+                  imagePath:curl,
                   title: "Tanishk Unisex Salon"),
               service(
                   imagePath: "Assets/images/filter icon.png",
@@ -49,7 +55,7 @@ class _homeState extends State<home> {
       title: "Haircuts",
       page: PolarTabPage(
         child: service(
-            imagePath: "Assets/images/img.png",
+            imagePath: curl2,
             title: "Tanishk Unisex Salon",
             distance: 1.2,
             description: 'janakpuri, New Delhi',
@@ -62,7 +68,7 @@ class _homeState extends State<home> {
       title: "Make up",
       page: PolarTabPage(
         child: service(
-          imagePath: "Assets/images/img.png",
+          imagePath: curl3,
           title: "Tanishk Unisex Salon",
           distance: 1.2,
           description: 'janakpuri, New Delhi',
@@ -126,9 +132,7 @@ class _homeState extends State<home> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // While the Future is still loading
               return Center(
-                  child: Container(
-                      padding: EdgeInsets.all(30),
-                      child: CircularProgressIndicator()));
+                  child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               // If there was an error
               return Center(child: Text('Error: ${snapshot.error}'));
@@ -192,7 +196,7 @@ class _homeState extends State<home> {
                         child: IconButton(
                           onPressed: () {
                             // print(link1);
-                            print(link2);
+                            print(purl);
                           },
                           icon: Icon(
                             Icons.notifications_none_outlined,
@@ -371,32 +375,9 @@ class _homeState extends State<home> {
                   ),
                   Container(
                     width: screenWidth,
-                    child: Row(
-                      children: [
-                        category(
-                            imagePath: "Assets/images/haircut.png",
-                            title: "Hair Cut"),
-                        category(
-                            imagePath: "Assets/images/makeup.png",
-                            title: "Hair Cut"),
-                        category(
-                            imagePath: "Assets/images/straightening.png",
-                            title: "Hair Cut")
-                      ],
-                    ),
+                    child:row(),
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 40, top: 20),
-                        child: Text(
-                          'Most Popular Services',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 17),
-                        ),
-                      ),
-                    ],
-                  ),
+
                   //             Container(
                   //               height: 50,
                   //               child: DefaultTabController(
@@ -600,16 +581,91 @@ class _homeState extends State<home> {
       String Url2 = await getImageUrl('Featured Services/beard.jpg');
       String Url3 = await getImageUrl('Featured Services/hair colouring.jpg');
       String Url4 = await getImageUrl('Featured Services/hair straightening.png');
+      String Url5 = await getImageUrl('Most Popular Services/saloon.jpg');
+      String Url6 = await getImageUrl('Most Popular Services/saloon2.jpg');
+      String Url7 = await getImageUrl('Most Popular Services/saloon3.jpg');
+      String Url8 = await getImageUrl('Category/beard.png');
+      String Url9 = await getImageUrl('Category/straightening.png');
+      String Url10 = await getImageUrl('Category/haircut.png');
+      String Url11 = await getImageUrl('Category/makeup.png');
+      String Url12 = await getImageUrl('Category/mani-pedi.png');
+      String Url13 = await getImageUrl('Category/message.png');
+      // String purl = await getImageUrl('Category/straightening.png');
+
       setState(() {
         url = Url;
         surl=Url2;
         surl2=Url3;
         surl3=Url4;
+        curl=Url5;
+        curl2=Url6;
+        curl3=Url7;
+        purl=Url8;
+        purl1=Url9;
+        purl2=Url10;
+        purl3=Url11;
+        purl4=Url12;
+        purl5=Url13;
+
       });
     } catch (e) {
       print('Error fetching image URL: $e');
       // Handle the error as needed
     }
+  }
+  Widget row() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('banner').snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Container(
+              padding: EdgeInsets.all(30),
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        } else if (snapshot.data!.docs.isEmpty) {
+          return Center(
+            child: Text("Null"),
+          );
+        } else {
+          final data = snapshot.data!.docs;
+          final name = data[0].data() as Map<String, dynamic>;
+
+          title = name['name'] as String;
+          title1 = name['name2'] as String;
+          title2 = name['name3'] as String;
+          title3 = name['name4'] as String;
+          title4 = name['name5'] as String;
+          title5 = name['name6'] as String;
+
+          return Column(
+            children: [
+              Row(
+                children: [
+                  category(imagePath: purl2, title: title),
+                  category(imagePath: purl3, title: title1),
+                  category(
+                      imagePath: purl1, title: title2),
+                ],
+              ),     Row(
+                children: [
+                  category(imagePath: purl4, title: title3),
+                  category(imagePath: purl5, title: title4),
+                  category(
+                      imagePath: purl, title: title5),
+                ],
+              ),
+              // Add more widgets as needed
+            ],
+          );
+        }
+      },
+    );
   }
 
 // page1() {}
