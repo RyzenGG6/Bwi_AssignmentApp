@@ -1,16 +1,20 @@
 # bwi_intern
 
-A new Flutter project.
+This is a small hair salon app made using Flutter
 
-## Getting Started
+Authentication System:
 
-This project is a starting point for a Flutter application.
+The application features a secure login screen that employs phone OTP (One-Time Password) authentication.
+Authentication is seamlessly implemented through Firebase, ensuring a robust and reliable user verification process.
+Data Storage and Retrieval:
 
-A few resources to get you started if this is your first Flutter project:
+Images displayed on the home screen are sourced from Firebase Storage, allowing for efficient and scalable storage solutions.
+Text content on the home screen is dynamically retrieved from a Firestore collection, ensuring real-time updates and flexibility in content management.
+Firebase Integration:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The application leverages Firebase services for both authentication and data storage, showcasing a commitment to industry-leading technologies.
+Firebase's authentication capabilities enhance the security of the login process, providing users with a seamless and trustworthy experience.
+User Interface:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The home screen is thoughtfully designed, with images loaded from Firebase Storage to create an engaging and visually appealing user interface.
+Text content from the Firestore collection contributes to a dynamic and customizable user experience.
