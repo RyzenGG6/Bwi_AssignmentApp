@@ -26,7 +26,7 @@ class MyCard extends StatelessWidget {
                 topRight: Radius.circular(15.0),
               ),
               child: Container(
-                child: Image.asset(
+                child: Image.network(
                   imagePath,
                   fit: BoxFit.cover,
                 ),

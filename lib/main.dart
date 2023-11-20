@@ -1,5 +1,7 @@
+import 'package:bwi_intern/screens/Category.dart';
 import 'package:bwi_intern/screens/home.dart';
 import 'package:bwi_intern/screens/login.dart';
+import 'package:bwi_intern/screens/main_screen.dart';
 import 'package:bwi_intern/screens/otp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         'home': (context) => const home(),
+        'category': (context) => const category_page(),
+        'main': (context) => const main_screen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         // '/second': (context) => const SecondScreen(),
       },

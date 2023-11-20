@@ -3,6 +3,7 @@ import 'package:bwi_intern/Card/service.dart';
 import 'package:bwi_intern/Firebase/firebase.dart';
 import 'package:bwi_intern/pages/page1.dart';
 import 'package:bwi_intern/pages/page2.dart';
+import 'package:bwi_intern/screens/Category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:polar_tab_bar/models/polar_tab_item.dart';
@@ -18,55 +19,80 @@ import '../Card/card.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
-
   @override
   State<home> createState() => _homeState();
 }
 
 class _homeState extends State<home> {
-
+  String url='',surl='',surl2='',surl3='';
   final List<PolarTabItem> tabs = [
     PolarTabItem(
       index: 0,
       title: "All",
-      page:  PolarTabPage(
-        child:
-
-        SingleChildScrollView(
+      page: PolarTabPage(
+        child: SingleChildScrollView(
           child: Column(
             children: [
-              service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon"),
-              service(imagePath: "Assets/images/filter icon.png", title: "Tanishk Unisex Salon"),
+              service(
+                  imagePath: "Assets/images/img.png",
+                  title: "Tanishk Unisex Salon"),
+              service(
+                  imagePath: "Assets/images/filter icon.png",
+                  title: "Tanishk Unisex Salon"),
             ],
           ),
         ),
       ),
-
     ),
     PolarTabItem(
       index: 1,
       title: "Haircuts",
-      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon",distance:1.2  ,description: 'janakpuri, New Delhi',rating: 4.8,reviews: 256),),
+      page: PolarTabPage(
+        child: service(
+            imagePath: "Assets/images/img.png",
+            title: "Tanishk Unisex Salon",
+            distance: 1.2,
+            description: 'janakpuri, New Delhi',
+            rating: 4.8,
+            reviews: 256),
+      ),
     ),
     PolarTabItem(
       index: 2,
       title: "Make up",
-      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon",distance:1.2  ,description: 'janakpuri, New Delhi',rating: 4.8,reviews: 256,),),
+      page: PolarTabPage(
+        child: service(
+          imagePath: "Assets/images/img.png",
+          title: "Tanishk Unisex Salon",
+          distance: 1.2,
+          description: 'janakpuri, New Delhi',
+          rating: 4.8,
+          reviews: 256,
+        ),
+      ),
     ),
     PolarTabItem(
       index: 3,
       title: "Manicure",
-      page:  PolarTabPage(child:  service(imagePath: "Assets/images/img.png", title: "Tanishk Unisex Salon",distance:1.2  ,description: 'janakpuri, New Delhi',rating: 4.8,reviews: 256),),
+      page: PolarTabPage(
+        child: service(
+            imagePath: "Assets/images/img.png",
+            title: "Tanishk Unisex Salon",
+            distance: 1.2,
+            description: 'janakpuri, New Delhi',
+            rating: 4.8,
+            reviews: 256),
+      ),
     ),
   ];
-   String link1 = "", link2 = "";
+  String link1 = "", link2 = "";
   int _selectedIndex = 0;
   final List<String> item = [
     'Assets/images/profile.jpg'
-    'Assets/images/profile.jpg'
+        'Assets/images/profile.jpg'
     // 'https://cdn.pixabay.com/photo/2015/03/10/17/23/youtube-667451_1280.png',
     // 'https://cdn.pixabay.com/photo/2015/03/10/17/23/youtube-667451_1280.png',
-        // 'https://example.com/image3.jpg',
+    // 'https://example.com/image3.jpg',
     // Add more image URLs as needed
   ];
 
@@ -76,58 +102,27 @@ class _homeState extends State<home> {
     // 'Description 3',
     // Add more descriptions as needed
   ];
+
   // link2 = "";
   @override
   void initState() {
     // TODO: implement initState
-    fetchData();
+   _fetchImageUrl();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     int currentIndex = 0;
     double screenWidth = MediaQuery.of(context).size.width;
     PageController pageController = PageController();
 
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-      unselectedItemColor:Colors.black ,
-      onTap: (index){
-          setState(() {
-_selectedIndex=index;
-          });
-      },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Menu',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Messages',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('banner').snapshots(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // While the Future is still loading
               return Center(
@@ -145,7 +140,7 @@ _selectedIndex=index;
               // If the Future has completed successfully
               final data = snapshot.data!.docs; // Access the Map
 
-              final url = data[0].data() as Map<String, dynamic>;
+              final url = data[1].data() as Map<String, dynamic>;
               // Access the specific data you need from the first document
               link1 = url['url'] as String;
               // link2 = url['movie2'] as String;
@@ -180,7 +175,8 @@ _selectedIndex=index;
                               TextSpan(
                                   text: 'Good Morning\n',
                                   style: TextStyle(
-                                      color: Colors.grey.shade700, fontSize: 15)),
+                                      color: Colors.grey.shade700,
+                                      fontSize: 15)),
                               TextSpan(
                                   text: 'Sushma Shukla',
                                   style: TextStyle(
@@ -223,7 +219,7 @@ _selectedIndex=index;
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10,top: 10),
+                    padding: EdgeInsets.only(left: 10, top: 10),
                     margin: EdgeInsets.only(top: 20),
                     width: screenWidth - 20,
                     height: 40,
@@ -265,13 +261,21 @@ _selectedIndex=index;
 //             effect: WormEffect(activeDotColor: Colors.blue, dotColor: Colors.grey),
 //           ),
 
-                  SizedBox(
-                    height: 300,
-                    child: PageView(
-                        controller: pageController,
-                        children: [page1(context), page2()]),
-                  ),
-                  Container(
+                SizedBox(
+                height: 250,
+                width: screenWidth - 40,
+                child: Container(
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                ),
+                child: PageView(
+                controller: pageController,
+                children: [page1(context), page2()],
+                ),
+                ),
+                ),
+
+                Container(
                     child: SmoothPageIndicator(
                       controller: pageController,
                       count: 4,
@@ -287,43 +291,41 @@ _selectedIndex=index;
                   // PageView
 // SizedBox
 
-           Row(
-             children: [
-               Container(
-                 padding: EdgeInsets.only(left: 20,top: 40),
-                 child: Text(
-                   'Featured Services',style: TextStyle(
-                   fontWeight: FontWeight.w600,
-                   fontSize: 17
-                 ),
-                 ),
-               )
-             ],
-           ),
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(left: 20, top: 40),
+                        child: Text(
+                          'Featured Services',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 17),
+                        ),
+                      )
+                    ],
+                  ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     physics: AlwaysScrollableScrollPhysics(),
-                    child:  Row(
+                    child: Row(
                       children: [
                         // Example Card 1
                         MyCard(
-                          imagePath: 'Assets/images/profile.jpg',
+                          imagePath:surl,
                           title: 'Beard Trimming',
                         ),
 
                         // Add more cards as needed
                         MyCard(
-                          imagePath: 'Assets/images/img.png',
+                          imagePath:surl3,
                           title: 'Another Service',
                         ),
                         MyCard(
-                          imagePath: 'Assets/images/profile.jpg',
+                          imagePath: surl2,
                           title: 'Another Service',
                         ),
 
                         // Add more cards as needed
                         // ...
-
                       ],
                     ),
                   ),
@@ -331,24 +333,28 @@ _selectedIndex=index;
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       Container(
-                        padding: EdgeInsets.only(left: 20,top: 40),
+                        padding: EdgeInsets.only(left: 20, top: 40),
                         child: Text(
-                          'Category',style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17
-                        ),
+                          'Category',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: screenWidth-180,top: 40),
-                        child: Text(
-                          'View All',style: TextStyle(
-                          color: Colors.lightBlue.shade900,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17
-                        ),
+                        padding:
+                            EdgeInsets.only(left: screenWidth - 180, top: 40),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, 'category');
+                          },
+                          child: Text(
+                            'View All',
+                            style: TextStyle(
+                                color: Colors.lightBlue.shade900,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17),
+                          ),
                         ),
                       )
                     ],
@@ -356,213 +362,189 @@ _selectedIndex=index;
                   SizedBox(
                     height: 20,
                   ),
-Container(
-  width: screenWidth,
-  child:   Row(
-
-    children: [
-
-  category(imagePath: "Assets/images/haircut.png", title: "Hair Cut"),
-
-  category(imagePath: "Assets/images/makeup.png", title: "Hair Cut"),
-
-  category(imagePath: "Assets/images/straightening.png", title: "Hair Cut")
-
-
-
-
-
-    ],
-
-  ),
-
-),
+                  Container(
+                    width: screenWidth,
+                    // child:row();
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   Container(
                     width: screenWidth,
-                    child:   Row(
-
+                    child: Row(
                       children: [
-
-                        category(imagePath: "Assets/images/haircut.png", title: "Hair Cut"),
-
-                        category(imagePath: "Assets/images/makeup.png", title: "Hair Cut"),
-
-                        category(imagePath: "Assets/images/straightening.png", title: "Hair Cut")
-
-
-
-
-
+                        category(
+                            imagePath: "Assets/images/haircut.png",
+                            title: "Hair Cut"),
+                        category(
+                            imagePath: "Assets/images/makeup.png",
+                            title: "Hair Cut"),
+                        category(
+                            imagePath: "Assets/images/straightening.png",
+                            title: "Hair Cut")
                       ],
-
                     ),
                   ),
                   Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: 40,top: 20),
+                        padding: EdgeInsets.only(left: 40, top: 20),
                         child: Text(
-                          'Most Popular Services',style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17
-                        ),
+                          'Most Popular Services',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 17),
                         ),
                       ),
                     ],
                   ),
-            //             Container(
-            //               height: 50,
-            //               child: DefaultTabController(
-            //               length: 3,
-            //               child: Column(
-            //               children: [
-            //               Material(
-            //               child: Container(
-            //               height: 55,
-            //               // width: 10,
-            //               color: Colors.white,
-            //               child: TabBar(
-            //               physics: const ClampingScrollPhysics(),
-            //               padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
-            //               unselectedLabelColor: Colors.pink,
-            //               indicatorSize: TabBarIndicatorSize.label,
-            //               indicator: BoxDecoration(
-            //               borderRadius: BorderRadius.circular(30),
-            //               color: Colors.green.shade700
-            // ),
-            // tabs: [
-            // Tab(
-            // child: Container(
-            // height: 50,
-            // decoration: BoxDecoration(
-            // borderRadius: BorderRadius.circular(30),
-            // border: Border.all(color: Colors.pinkAccent, width: 1)
-            // ),
-            // child: Align(
-            // alignment: Alignment.center,
-            // child: Text("All"),
-            // ),
-            // ),
-            // ),
-            // Tab(
-            // child: Container(
-            // height: 50,
-            // decoration: BoxDecoration(
-            // borderRadius: BorderRadius.circular(30),
-            // border: Border.all(color: Colors.pinkAccent, width: 1)
-            // ),
-            // child: Align(
-            // alignment: Alignment.center,
-            // child: Text("Haircuts"),
-            // ),
-            // ),
-            // ),
-            // Tab(
-            // child: Container(
-            // height: 50,
-            // decoration: BoxDecoration(
-            // borderRadius: BorderRadius.circular(30),
-            // border: Border.all(color: Colors.pinkAccent, width: 1)
-            // ),
-            // child: Align(
-            // alignment: Alignment.center,
-            // child: Text("Make up"),
-            // ),
-            // ),
-            // ),
-            //   Tab(
-            //     child: Container(
-            //       height: 40,
-            //       width: 70,
-            //       decoration: BoxDecoration(
-            //           borderRadius: BorderRadius.circular(20),
-            //           border: Border.all(color: Colors.pinkAccent, width: 1)
-            //       ),
-            //       child: Align(
-            //         alignment: Alignment.center,
-            //         child: Text("Manicure"),
-            //       ),
-            //     ),
-            //   )
-            // ],
-            // ),
-            // ),
-            // ),
-            // SizedBox(
-            //   height: 300,
-            // ),
-            // Expanded(
-            // child: TabBarView(
-            // children: [
-            //   ListView.separated(
-            //     padding: EdgeInsets.all(15),
-            //     itemCount: 20,
-            //     separatorBuilder: (BuildContext context, int index) => const Divider(),
-            //     itemBuilder: (context, index){
-            //       return ListTile(
-            //         onTap: () {},
-            //         title: Text("Chat List $index"),
-            //         subtitle: Text("Tab bar ui"),
-            //         trailing: Icon(Icons.arrow_circle_right_sharp),
-            //       );
-            //     },
-            //   ),
-            //   ListView.separated(
-            //     padding: EdgeInsets.all(15),
-            //     itemCount: 20,
-            //     separatorBuilder: (BuildContext context, int index) => const Divider(),
-            //     itemBuilder: (context, index){
-            //       return ListTile(
-            //         onTap: () {},
-            //         title: Text("Status List $index"),
-            //         subtitle: Text("Tab bar ui"),
-            //         trailing: Icon(Icons.arrow_circle_right_sharp),
-            //       );
-            //     },
-            //   ),
-            //   ListView.separated(
-            //     padding: EdgeInsets.all(15),
-            //     itemCount: 20,
-            //     separatorBuilder: (BuildContext context, int index) => const Divider(),
-            //     itemBuilder: (context, index){
-            //       return ListTile(
-            //         onTap: () {},
-            //         title: Text("Call List $index"),
-            //         subtitle: Text("Tab bar ui"),
-            //         trailing: Icon(Icons.arrow_circle_right_sharp),
-            //       );
-            //     },
-            //   ),
-            // ],
-            // ),
-            // )
-            //     ],
-            //   ),),
-            //             ),
-                  
+                  //             Container(
+                  //               height: 50,
+                  //               child: DefaultTabController(
+                  //               length: 3,
+                  //               child: Column(
+                  //               children: [
+                  //               Material(
+                  //               child: Container(
+                  //               height: 55,
+                  //               // width: 10,
+                  //               color: Colors.white,
+                  //               child: TabBar(
+                  //               physics: const ClampingScrollPhysics(),
+                  //               padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                  //               unselectedLabelColor: Colors.pink,
+                  //               indicatorSize: TabBarIndicatorSize.label,
+                  //               indicator: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(30),
+                  //               color: Colors.green.shade700
+                  // ),
+                  // tabs: [
+                  // Tab(
+                  // child: Container(
+                  // height: 50,
+                  // decoration: BoxDecoration(
+                  // borderRadius: BorderRadius.circular(30),
+                  // border: Border.all(color: Colors.pinkAccent, width: 1)
+                  // ),
+                  // child: Align(
+                  // alignment: Alignment.center,
+                  // child: Text("All"),
+                  // ),
+                  // ),
+                  // ),
+                  // Tab(
+                  // child: Container(
+                  // height: 50,
+                  // decoration: BoxDecoration(
+                  // borderRadius: BorderRadius.circular(30),
+                  // border: Border.all(color: Colors.pinkAccent, width: 1)
+                  // ),
+                  // child: Align(
+                  // alignment: Alignment.center,
+                  // child: Text("Haircuts"),
+                  // ),
+                  // ),
+                  // ),
+                  // Tab(
+                  // child: Container(
+                  // height: 50,
+                  // decoration: BoxDecoration(
+                  // borderRadius: BorderRadius.circular(30),
+                  // border: Border.all(color: Colors.pinkAccent, width: 1)
+                  // ),
+                  // child: Align(
+                  // alignment: Alignment.center,
+                  // child: Text("Make up"),
+                  // ),
+                  // ),
+                  // ),
+                  //   Tab(
+                  //     child: Container(
+                  //       height: 40,
+                  //       width: 70,
+                  //       decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(20),
+                  //           border: Border.all(color: Colors.pinkAccent, width: 1)
+                  //       ),
+                  //       child: Align(
+                  //         alignment: Alignment.center,
+                  //         child: Text("Manicure"),
+                  //       ),
+                  //     ),
+                  //   )
+                  // ],
+                  // ),
+                  // ),
+                  // ),
+                  // SizedBox(
+                  //   height: 300,
+                  // ),
+                  // Expanded(
+                  // child: TabBarView(
+                  // children: [
+                  //   ListView.separated(
+                  //     padding: EdgeInsets.all(15),
+                  //     itemCount: 20,
+                  //     separatorBuilder: (BuildContext context, int index) => const Divider(),
+                  //     itemBuilder: (context, index){
+                  //       return ListTile(
+                  //         onTap: () {},
+                  //         title: Text("Chat List $index"),
+                  //         subtitle: Text("Tab bar ui"),
+                  //         trailing: Icon(Icons.arrow_circle_right_sharp),
+                  //       );
+                  //     },
+                  //   ),
+                  //   ListView.separated(
+                  //     padding: EdgeInsets.all(15),
+                  //     itemCount: 20,
+                  //     separatorBuilder: (BuildContext context, int index) => const Divider(),
+                  //     itemBuilder: (context, index){
+                  //       return ListTile(
+                  //         onTap: () {},
+                  //         title: Text("Status List $index"),
+                  //         subtitle: Text("Tab bar ui"),
+                  //         trailing: Icon(Icons.arrow_circle_right_sharp),
+                  //       );
+                  //     },
+                  //   ),
+                  //   ListView.separated(
+                  //     padding: EdgeInsets.all(15),
+                  //     itemCount: 20,
+                  //     separatorBuilder: (BuildContext context, int index) => const Divider(),
+                  //     itemBuilder: (context, index){
+                  //       return ListTile(
+                  //         onTap: () {},
+                  //         title: Text("Call List $index"),
+                  //         subtitle: Text("Tab bar ui"),
+                  //         trailing: Icon(Icons.arrow_circle_right_sharp),
+                  //       );
+                  //     },
+                  //   ),
+                  // ],
+                  // ),
+                  // )
+                  //     ],
+                  //   ),),
+                  //             ),
+
                   // Text("bkfnakjd\nanfkddfksdnfsdjksf\ndfjsdbsf\n\nfsdffs\sdfsdfsd\nsdfdsfds")
                   Container(
                     height: 350,
                     child: Container(
                       // width: 40,
-                      padding: EdgeInsets.only(left: 40,top: 20),
+                      padding: EdgeInsets.only(left: 40, top: 20),
                       child: PolarTabBar(
-                        swipeable: true,
-                        activeBackground: Colors.blueAccent.shade700,
+                          swipeable: true,
+                          activeBackground: Colors.blueAccent.shade700,
                           type: PolarTabType.pill, // Default Type
-                          tabs: tabs
-                      ),
+                          tabs: tabs),
                     ),
                   ),
-                  
-                                    ],);
+                ],
+              );
             }
           },
         ),
-
       ),
     );
   }
@@ -571,15 +553,19 @@ Container(
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      height: 300,
+      height: 200,
       width: screenWidth - 20,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
       ),
-      child:Image.network(link1),
-        // fit: BoxFit.cover, // You might want to adjust the fit based on your requirements
-
+      child: Image.network(
+        url,
+        height: 200,
+        width: screenWidth - 20,
+        fit: BoxFit.contain,
+      ),
     );
+
   }
 
   Future<void> fetchData() async {
@@ -588,13 +574,41 @@ Container(
       final ref = FirebaseStorage.instance.ref().child('testimage');
 // no need of the file extension, the name will do fine.
       var url = await ref.getDownloadURL();
-      print("url is : "+url);
+      print("url is : " + url);
 
       setState(() {
         link2 = url;
       });
     } catch (error) {
       print('Error: $error');
+    }
+  }
+  Widget _getPage(int index) {
+    switch (index) {
+      case 0:
+        return home();
+      case 1:
+        return category_page();
+      default:
+        return Container();
+    }
+  }
+
+  Future<void> _fetchImageUrl() async {
+    try {
+      String Url = await getImageUrl('banner.png');
+      String Url2 = await getImageUrl('Featured Services/beard.jpg');
+      String Url3 = await getImageUrl('Featured Services/hair colouring.jpg');
+      String Url4 = await getImageUrl('Featured Services/hair straightening.png');
+      setState(() {
+        url = Url;
+        surl=Url2;
+        surl2=Url3;
+        surl3=Url4;
+      });
+    } catch (e) {
+      print('Error fetching image URL: $e');
+      // Handle the error as needed
     }
   }
 

@@ -188,7 +188,7 @@ class _otpState extends State<otp> {
     // Sign the user in (or link) with the credential
     await auth.signInWithCredential(credential);
 
-    Navigator.pushNamed(context, 'home');
+    Navigator.pushNamed(context, 'main');
     print("success");
     } catch (error) {
     print("Error during sign in: $error");

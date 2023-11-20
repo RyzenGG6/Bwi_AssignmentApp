@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 
 Future<Map<String, dynamic>> getData() async {
@@ -19,16 +20,13 @@ Future<Map<String, dynamic>> getData() async {
 }
 final FirebaseStorage _storage = FirebaseStorage.instance;
 
-Future<Map<String, dynamic>> getImageUrls() async {
-  Map<String, String> imageUrls = {};
-
+Future<String> getImageUrl(String imageName) async {
   try {
-    final ref = FirebaseStorage.instance.ref().child('banner.png');
-    var url = await ref.getDownloadURL();
-    imageUrls['banner.png']=url;
-  } catch (error) {
-    print('Error fetching image URLs: $error');
+    final ref = firebase_storage.FirebaseStorage.instance.ref().child(imageName);
+    final url = await ref.getDownloadURL();
+    return url;
+  } catch (e) {
+    print('Error getting image URL: $e');
+    return ''; // Return an empty string or handle the error as needed
   }
-
-  return imageUrls;
 }

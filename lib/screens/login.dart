@@ -28,7 +28,7 @@ class _loginState extends State<login> {
               child:
               GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, 'home');
+                  Navigator.pushNamed(context, 'main');
                 } ,
                 child: Text(
                   'SKIP',
